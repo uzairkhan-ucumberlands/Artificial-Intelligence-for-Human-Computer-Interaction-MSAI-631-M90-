@@ -1,0 +1,78 @@
+## MSAI-631-M90 - Prototype Simple Traditional Chatbot Project
+## Uzair Khan
+## 02/15/2026
+
+import re
+import random
+
+# Predefined responses
+responses = {
+    'greeting': [
+        "Hello! How can I help you today?",
+        "Hi there! Ready to discuss AI and HCI?",
+        "Hey! I can answer questions about MSAI-631-M90."
+    ],
+    'course': [
+        "This course is Artificial Intelligence for Human-Computer Interaction (MSAI-631-M90).",
+        "You will learn AI applications in HCI, interface design, and user experience evaluation.",
+        "The course blends theoretical AI concepts with practical HCI projects."
+    ],
+    'assignment': [
+        "Assignments are submitted via the course portal before the deadline.",
+        "Make sure to check the syllabus for each assignment's due date."
+    ],
+    'capabilities': [
+        "I can greet you, provide course info, answer assignment questions, and respond to unknown input."
+    ],
+    'farewell': [
+        "Goodbye! Keep exploring AI and HCI.",
+        "Bye! Come back if you have more questions about MSAI-631-M90.",
+        "See you later! Keep practicing your HCI skills."
+    ],
+    'fallback': [
+        "I'm sorry, I didn't understand that. Can you rephrase?",
+        "Hmm, I don't have an answer for that yet. Try asking differently.",
+        "I can't process that input, but feel free to ask about the course, assignments, or greetings."
+    ]
+}
+
+# Chatbot response function
+def chatbot_response(user_input):
+    user_input = user_input.lower() 
+
+    # Greetings
+    if re.search(r'\b(hi|hello|hey|good morning|good afternoon)\b', user_input):
+        return random.choice(responses['greeting'])
+    
+    # Course info
+    elif re.search(r'\b(course|msai|hci|ai)\b', user_input):
+        return random.choice(responses['course'])
+    
+    # Assignment info
+    elif re.search(r'\b(assignment|homework|project|deadline|due date)\b', user_input):
+        return random.choice(responses['assignment'])
+    
+    # Capabilities
+    elif re.search(r'\b(what can you do|capabilities|functions)\b', user_input):
+        return random.choice(responses['capabilities'])
+    
+    # Farewell
+    elif re.search(r'\b(bye|goodbye|see you|exit|quit)\b', user_input):
+        return random.choice(responses['farewell'])
+    
+    # Fallback for malformed/unrecognized input
+    else:
+        return random.choice(responses['fallback'])
+
+# Interactive loop
+print("Chatbot: Hello! I am your MSAI-631-M90 course assistant.")
+print("Type 'exit' or 'quit' to leave.\n")
+
+while True:
+    user_input = input("You: ")
+    
+    if user_input.lower() in ['exit', 'quit']:
+        print("Chatbot: Goodbye! Keep exploring AI and HCI.")
+        break
+    
+    print("Chatbot:", chatbot_response(user_input))
